@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1f293d"/>
+      <stop offset="100%" stop-color="#131b2e"/>
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="540" fill="url(#bgGrad)"/>
+  <circle cx="850" cy="80" r="180" fill="#10b981" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="200" cy="460" r="160" fill="#06b6d4" opacity="0.07" filter="url(#glow)"/>
+
+  <!-- Top App Navigation Bar -->
+  <rect x="0" y="0" width="960" height="54" fill="#0d1322" stroke="#1e293b" stroke-width="1"/>
+  <!-- App Logo -->
+  <rect x="24" y="14" width="26" height="26" rx="6" fill="url(#emeraldGrad)"/>
+  <path d="M 31 27 L 35 32 L 43 20" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="60" y="31" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">OfficeIMS</text>
+  <text x="135" y="31" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">INVENTORY &amp; ASSET SUITE</text>
+
+  <!-- Search Bar in Header -->
+  <rect x="360" y="11" width="300" height="32" rx="8" fill="#151f33" stroke="#2a3952" stroke-width="1"/>
+  <circle cx="378" cy="27" r="5" fill="none" stroke="#64748b" stroke-width="1.8"/>
+  <line x1="382" y1="31" x2="387" y2="36" stroke="#64748b" stroke-width="1.8" stroke-linecap="round"/>
+  <text x="398" y="32" fill="#64748b" font-family="sans-serif" font-size="12">Search asset ID, hardware, category...</text>
+
+  <!-- User badge -->
+  <rect x="830" y="12" width="106" height="30" rx="15" fill="#151f33" stroke="#2a3952" stroke-width="1"/>
+  <circle cx="845" cy="27" r="9" fill="url(#emeraldGrad)"/>
+  <text x="860" y="31" fill="#e2e8f0" font-family="sans-serif" font-size="12" font-weight="600">Admin</text>
+  <circle cx="918" cy="27" r="3" fill="#10b981"/>
+
+  <!-- Left Sidebar -->
+  <rect x="0" y="54" width="200" height="486" fill="#0d1322" stroke="#1e293b" stroke-width="1"/>
+  <!-- Sidebar Menu Items -->
+  <g transform="translate(16, 75)">
+    <!-- Active Item: Dashboard -->
+    <rect x="0" y="0" width="168" height="36" rx="8" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="1"/>
+    <rect x="12" y="11" width="14" height="14" rx="3" fill="#10b981"/>
+    <text x="36" y="23" fill="#10b981" font-family="sans-serif" font-size="13" font-weight="600">Dashboard</text>
+
+    <!-- Item: Assets & Hardware -->
+    <rect x="0" y="46" width="168" height="34" rx="8" fill="transparent"/>
+    <rect x="12" y="56" width="14" height="14" rx="3" fill="#475569"/>
+    <text x="36" y="68" fill="#94a3b8" font-family="sans-serif" font-size="13">Asset Inventory</text>
+
+    <!-- Item: Requisitions -->
+    <rect x="0" y="90" width="168" height="34" rx="8" fill="transparent"/>
+    <rect x="12" y="100" width="14" height="14" rx="3" fill="#475569"/>
+    <text x="36" y="112" fill="#94a3b8" font-family="sans-serif" font-size="13">Requisitions</text>
+
+    <!-- Item: Stock Alerts -->
+    <rect x="0" y="134" width="168" height="34" rx="8" fill="transparent"/>
+    <rect x="12" y="144" width="14" height="14" rx="3" fill="#475569"/>
+    <text x="36" y="156" fill="#94a3b8" font-family="sans-serif" font-size="13">Low Stock Alerts</text>
+    <rect x="144" y="142" width="18" height="18" rx="9" fill="#ef4444"/>
+    <text x="149" y="155" fill="#ffffff" font-family="sans-serif" font-size="10" font-weight="700">7</text>
+
+    <!-- Item: Departments -->
+    <rect x="0" y="178" width="168" height="34" rx="8" fill="transparent"/>
+    <rect x="12" y="188" width="14" height="14" rx="3" fill="#475569"/>
+    <text x="36" y="200" fill="#94a3b8" font-family="sans-serif" font-size="13">Departments</text>
+
+    <!-- Item: Reports & Export -->
+    <rect x="0" y="222" width="168" height="34" rx="8" fill="transparent"/>
+    <rect x="12" y="232" width="14" height="14" rx="3" fill="#475569"/>
+    <text x="36" y="244" fill="#94a3b8" font-family="sans-serif" font-size="13">Audit Reports</text>
+  </g>
+
+  <!-- Main Content Area -->
+  <!-- Top Stat Cards (3 Cards) -->
+  <g transform="translate(225, 75)">
+    <!-- Card 1 -->
+    <rect x="0" y="0" width="224" height="96" rx="12" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1"/>
+    <text x="20" y="28" fill="#94a3b8" font-family="sans-serif" font-size="12" font-weight="600">TOTAL MONITORED ASSETS</text>
+    <text x="20" y="60" fill="#f8fafc" font-family="sans-serif" font-size="26" font-weight="800">2,845</text>
+    <rect x="160" y="20" width="44" height="22" rx="11" fill="#10b981" fill-opacity="0.15"/>
+    <text x="168" y="35" fill="#10b981" font-family="sans-serif" font-size="11" font-weight="700">+12%</text>
+    <text x="20" y="82" fill="#64748b" font-family="sans-serif" font-size="11">98.4% deployed to active staff</text>
+
+    <!-- Card 2 -->
+    <rect x="244" y="0" width="224" height="96" rx="12" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1"/>
+    <text x="264" y="28" fill="#94a3b8" font-family="sans-serif" font-size="12" font-weight="600">TOTAL ASSET VALUATION</text>
+    <text x="264" y="60" fill="#f8fafc" font-family="sans-serif" font-size="26" font-weight="800">$482,900</text>
+    <rect x="404" y="20" width="44" height="22" rx="11" fill="#06b6d4" fill-opacity="0.15"/>
+    <text x="412" y="35" fill="#06b6d4" font-family="sans-serif" font-size="11" font-weight="700">Audit</text>
+    <text x="264" y="82" fill="#64748b" font-family="sans-serif" font-size="11">Hardware &amp; Enterprise licenses</text>
+
+    <!-- Card 3 -->
+    <rect x="488" y="0" width="224" height="96" rx="12" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1"/>
+    <text x="508" y="28" fill="#94a3b8" font-family="sans-serif" font-size="12" font-weight="600">PENDING REQUISITIONS</text>
+    <text x="508" y="60" fill="#f8fafc" font-family="sans-serif" font-size="26" font-weight="800">18</text>
+    <rect x="648" y="20" width="44" height="22" rx="11" fill="#f59e0b" fill-opacity="0.15"/>
+    <text x="656" y="35" fill="#f59e0b" font-family="sans-serif" font-size="11" font-weight="700">Review</text>
+    <text x="508" y="82" fill="#64748b" font-family="sans-serif" font-size="11">Avg approval turnaround: 4.2h</text>
+  </g>
+
+  <!-- Big Table: Inventory Management -->
+  <g transform="translate(225, 192)">
+    <rect x="0" y="0" width="712" height="320" rx="14" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1"/>
+    
+    <!-- Table Header Toolbar -->
+    <text x="24" y="34" fill="#f8fafc" font-family="sans-serif" font-size="16" font-weight="700">Recent Asset Allocations</text>
+    <rect x="560" y="16" width="128" height="28" rx="6" fill="#10b981"/>
+    <text x="578" y="34" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="700">+ Add New Item</text>
+
+    <!-- Table Columns Header -->
+    <rect x="18" y="52" width="676" height="34" rx="6" fill="#131c2e"/>
+    <text x="32" y="73" fill="#64748b" font-family="sans-serif" font-size="11" font-weight="700">ASSET CODE</text>
+    <text x="145" y="73" fill="#64748b" font-family="sans-serif" font-size="11" font-weight="700">ITEM SPECIFICATION</text>
+    <text x="345" y="73" fill="#64748b" font-family="sans-serif" font-size="11" font-weight="700">ASSIGNED DEPT</text>
+    <text x="495" y="73" fill="#64748b" font-family="sans-serif" font-size="11" font-weight="700">STATUS</text>
+    <text x="615" y="73" fill="#64748b" font-family="sans-serif" font-size="11" font-weight="700">ACTION</text>
+
+    <!-- Row 1 -->
+    <text x="32" y="112" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="600">AST-2026-901</text>
+    <text x="145" y="112" fill="#e2e8f0" font-family="sans-serif" font-size="13" font-weight="600">Apple MacBook Pro M3 (16GB)</text>
+    <text x="345" y="112" fill="#94a3b8" font-family="sans-serif" font-size="12">Software Engineering</text>
+    <rect x="495" y="98" width="76" height="22" rx="11" fill="#10b981" fill-opacity="0.2"/>
+    <text x="510" y="113" fill="#10b981" font-family="sans-serif" font-size="11" font-weight="700">In Use</text>
+    <text x="625" y="112" fill="#64748b" font-family="sans-serif" font-size="12">Manage</text>
+    <line x1="20" y1="130" x2="692" y2="130" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 2 -->
+    <text x="32" y="157" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="600">AST-2026-844</text>
+    <text x="145" y="157" fill="#e2e8f0" font-family="sans-serif" font-size="13" font-weight="600">Dell UltraSharp 27" 4K Monitor</text>
+    <text x="345" y="157" fill="#94a3b8" font-family="sans-serif" font-size="12">UI/UX Design Studio</text>
+    <rect x="495" y="143" width="76" height="22" rx="11" fill="#10b981" fill-opacity="0.2"/>
+    <text x="510" y="158" fill="#10b981" font-family="sans-serif" font-size="11" font-weight="700">In Use</text>
+    <text x="625" y="157" fill="#64748b" font-family="sans-serif" font-size="12">Manage</text>
+    <line x1="20" y1="175" x2="692" y2="175" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 3 -->
+    <text x="32" y="202" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="600">AST-2026-729</text>
+    <text x="145" y="202" fill="#e2e8f0" font-family="sans-serif" font-size="13" font-weight="600">Cisco Gigabit Switch 24-Port</text>
+    <text x="345" y="202" fill="#94a3b8" font-family="sans-serif" font-size="12">IT Infrastructure</text>
+    <rect x="495" y="188" width="76" height="22" rx="11" fill="#06b6d4" fill-opacity="0.2"/>
+    <text x="506" y="203" fill="#06b6d4" font-family="sans-serif" font-size="11" font-weight="700">Verified</text>
+    <text x="625" y="202" fill="#64748b" font-family="sans-serif" font-size="12">Manage</text>
+    <line x1="20" y1="220" x2="692" y2="220" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 4 -->
+    <text x="32" y="247" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="600">AST-2026-612</text>
+    <text x="145" y="247" fill="#e2e8f0" font-family="sans-serif" font-size="13" font-weight="600">Logitech MX Master 3S Mouse</text>
+    <text x="345" y="247" fill="#94a3b8" font-family="sans-serif" font-size="12">Warehouse Reserve</text>
+    <rect x="495" y="233" width="76" height="22" rx="11" fill="#f59e0b" fill-opacity="0.2"/>
+    <text x="504" y="248" fill="#f59e0b" font-family="sans-serif" font-size="11" font-weight="700">In Stock</text>
+    <text x="625" y="247" fill="#64748b" font-family="sans-serif" font-size="12">Manage</text>
+    <line x1="20" y1="265" x2="692" y2="265" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 5 -->
+    <text x="32" y="292" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="600">AST-2026-508</text>
+    <text x="145" y="292" fill="#e2e8f0" font-family="sans-serif" font-size="13" font-weight="600">HP LaserJet Enterprise MFP</text>
+    <text x="345" y="292" fill="#94a3b8" font-family="sans-serif" font-size="12">Operations Wing</text>
+    <rect x="495" y="278" width="76" height="22" rx="11" fill="#10b981" fill-opacity="0.2"/>
+    <text x="510" y="293" fill="#10b981" font-family="sans-serif" font-size="11" font-weight="700">In Use</text>
+    <text x="625" y="292" fill="#64748b" font-family="sans-serif" font-size="12">Manage</text>
+  </g>
+</svg>
