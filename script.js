@@ -82,6 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileToggle.classList.toggle('open', isOpen);
       navMenu.classList.toggle('open', isOpen);
       mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      // Prevent background scrolling when mobile menu is open
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     };
 
     mobileToggle.addEventListener('click', (e) => {
@@ -111,9 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Close menu when resizing past mobile breakpoint
+    // Close menu when resizing past tablet breakpoint (992px)
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 768 && navMenu.classList.contains('open')) {
+      if (window.innerWidth > 992 && navMenu.classList.contains('open')) {
         setMenuState(false);
       }
     });
