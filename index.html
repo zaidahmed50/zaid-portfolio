@@ -46,9 +46,148 @@
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Early Theme Detection to prevent theme flash -->
+    <script>
+      (function () {
+        try {
+          const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        } catch (e) {}
+      })();
+    </script>
   </head>
 
-  <body>
+  <body class="loading">
+    <!-- Professional High-Performance Preloader -->
+    <div
+      id="preloader"
+      class="preloader"
+      role="status"
+      aria-live="polite"
+      aria-label="Loading portfolio"
+    >
+      <div class="preloader-backdrop">
+        <div class="preloader-glow-orb preloader-glow-1" aria-hidden="true"></div>
+        <div class="preloader-glow-orb preloader-glow-2" aria-hidden="true"></div>
+      </div>
+      <div class="preloader-content">
+        <!-- Brand Mark with Circular Progress Ring -->
+        <div class="preloader-brand">
+          <div class="preloader-ring">
+            <svg class="preloader-ring-svg" viewBox="0 0 120 120">
+              <defs>
+                <linearGradient
+                  id="preloader-grad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#6366f1" />
+                  <stop offset="50%" stop-color="#8b5cf6" />
+                  <stop offset="100%" stop-color="#06b6d4" />
+                </linearGradient>
+                <linearGradient
+                  id="preloader-accent"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#38bdf8" />
+                  <stop offset="100%" stop-color="#818cf8" />
+                </linearGradient>
+              </defs>
+              <circle class="preloader-ring-track" cx="60" cy="60" r="52"></circle>
+              <circle
+                class="preloader-ring-fill"
+                id="preloader-circle-fill"
+                cx="60"
+                cy="60"
+                r="52"
+              ></circle>
+            </svg>
+          </div>
+          <div class="preloader-logo-icon">
+            <svg
+              class="preloader-svg-logo"
+              viewBox="0 0 44 44"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="2"
+                y="2"
+                width="40"
+                height="40"
+                rx="11"
+                class="preloader-logo-bg"
+                fill="url(#preloader-grad)"
+                fill-opacity="0.15"
+                stroke="url(#preloader-grad)"
+                stroke-width="1.8"
+              />
+              <path
+                d="M12 15H21L13 29H22"
+                stroke="url(#preloader-grad)"
+                stroke-width="2.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M22.5 29L27.5 15L32.5 29"
+                stroke="url(#preloader-accent)"
+                stroke-width="2.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M24.8 24.5H30.2"
+                stroke="url(#preloader-accent)"
+                stroke-width="2.2"
+                stroke-linecap="round"
+              />
+              <circle
+                cx="32.5"
+                cy="15"
+                r="2.2"
+                fill="#06b6d4"
+                class="preloader-dot-glow"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Brand Name -->
+        <div class="preloader-name">
+          <span class="preloader-name-zaid">Zaid</span>
+          <span class="preloader-name-ahmad">Ahmad</span>
+          <span class="preloader-badge">Portfolio</span>
+        </div>
+
+        <!-- Linear Progress Bar -->
+        <div class="preloader-progress-container">
+          <div class="preloader-progress-bar">
+            <div class="preloader-progress-fill" id="preloader-bar-fill"></div>
+          </div>
+          <div class="preloader-meta">
+            <span class="preloader-status" id="preloader-status-text"
+              >Initializing workspace...</span
+            >
+            <span class="preloader-percent" id="preloader-percent-text">0%</span>
+          </div>
+        </div>
+
+        <!-- Tech Badges -->
+        <div class="preloader-tags">
+          <span><i class="fa-brands fa-react"></i> React.js</span>
+          <span><i class="fa-brands fa-node-js"></i> Node.js</span>
+          <span><i class="fa-solid fa-layer-group"></i> MERN Stack</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Ambient background glow elements -->
     <div class="glow-orb orb-1" aria-hidden="true"></div>
     <div class="glow-orb orb-2" aria-hidden="true"></div>

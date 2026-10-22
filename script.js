@@ -3,6 +3,142 @@
  * Smooth interactions, Theme Switching, Project Filtering & Typing Animations
  */
 
+/* ==========================================================================
+   0. Professional Full-Screen Preloader & Asset Cache Controller
+   ========================================================================== */
+(function initPortfolioPreloader() {
+  const preloader = document.getElementById('preloader');
+  if (!preloader) return;
+
+  const circleFill = document.getElementById('preloader-circle-fill');
+  const barFill = document.getElementById('preloader-bar-fill');
+  const percentText = document.getElementById('preloader-percent-text');
+  const statusText = document.getElementById('preloader-status-text');
+
+  // SVG circle radius is 52 -> 2 * PI * 52 ≈ 326.72
+  const circlePerimeter = 326.72;
+
+  let currentPercent = 0;
+  let targetPercent = 14;
+  let isFinished = false;
+
+  const updateTarget = (val) => {
+    if (val > targetPercent) {
+      targetPercent = Math.min(Math.round(val), 100);
+    }
+  };
+
+  // Collect all critical image assets to preload
+  const domImgSrcs = Array.from(document.querySelectorAll('img'))
+    .map(img => img.getAttribute('src'))
+    .filter(Boolean);
+
+  const keyAssets = [
+    'assets/images/project-dragonpro.jpg',
+    'assets/images/project-iboothme.jpg',
+    'assets/images/project-officeims.jpg',
+    'assets/images/project-sirajiya.jpg',
+    'assets/images/project-dragonweb.jpg',
+    'assets/images/project-flaris.jpg'
+  ];
+
+  const uniqueAssets = Array.from(new Set([...domImgSrcs, ...keyAssets]));
+  const totalAssets = uniqueAssets.length;
+  let loadedAssets = 0;
+
+  const onAssetComplete = () => {
+    loadedAssets++;
+    if (totalAssets > 0) {
+      // Images contribute up to 60% of total progress
+      const imgFraction = (loadedAssets / totalAssets) * 60;
+      updateTarget(15 + imgFraction);
+    }
+  };
+
+  if (totalAssets === 0) {
+    updateTarget(65);
+  } else {
+    uniqueAssets.forEach(src => {
+      const img = new Image();
+      img.onload = onAssetComplete;
+      img.onerror = onAssetComplete;
+      img.src = src;
+    });
+  }
+
+  // Preload web fonts
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready
+      .then(() => updateTarget(Math.max(targetPercent, 85)))
+      .catch(() => updateTarget(Math.max(targetPercent, 85)));
+  }
+
+  // Window load event (stylesheets, scripts, external icons)
+  const onWindowLoad = () => {
+    updateTarget(100);
+  };
+
+  if (document.readyState === 'complete') {
+    onWindowLoad();
+  } else {
+    window.addEventListener('load', onWindowLoad, { once: true });
+  }
+
+  // Safety fallback timeout: Never keep the user waiting more than 3.2s
+  const safetyTimeout = setTimeout(() => {
+    targetPercent = 100;
+  }, 3200);
+
+  const getStatusMessage = (p) => {
+    if (p < 25) return 'Initializing workspace...';
+    if (p < 55) return 'Loading project showcases & media...';
+    if (p < 85) return 'Rendering typography & UI components...';
+    if (p < 100) return 'Optimizing performance...';
+    return 'Ready! Welcome to my portfolio';
+  };
+
+  // Smooth frame-by-frame interpolation
+  function stepProgress() {
+    if (currentPercent < targetPercent) {
+      const delta = targetPercent - currentPercent;
+      const step = Math.max(1, Math.ceil(delta * 0.14));
+      currentPercent = Math.min(currentPercent + step, targetPercent);
+
+      if (percentText) percentText.textContent = `${currentPercent}%`;
+      if (barFill) barFill.style.width = `${currentPercent}%`;
+      if (circleFill) {
+        const offset = circlePerimeter - (circlePerimeter * currentPercent) / 100;
+        circleFill.style.strokeDashoffset = Math.max(0, offset);
+      }
+      if (statusText) {
+        statusText.textContent = getStatusMessage(currentPercent);
+      }
+    }
+
+    if (currentPercent >= 100 && !isFinished) {
+      isFinished = true;
+      clearTimeout(safetyTimeout);
+      if (statusText) statusText.textContent = 'Ready! Welcome';
+
+      setTimeout(() => {
+        preloader.classList.add('loaded');
+        document.body.classList.remove('loading');
+
+        setTimeout(() => {
+          preloader.setAttribute('aria-hidden', 'true');
+          preloader.style.display = 'none';
+        }, 700);
+      }, 300);
+
+      return;
+    }
+
+    requestAnimationFrame(stepProgress);
+  }
+
+  requestAnimationFrame(stepProgress);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Current Year in Footer
   const yearElement = document.getElementById('current-year');
