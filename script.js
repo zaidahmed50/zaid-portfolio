@@ -4,22 +4,18 @@
  */
 
 /* ==========================================================================
-   0. Professional Full-Screen Preloader & Asset Cache Controller
+   0. Minimalist Luxury Professional Preloader Controller
    ========================================================================== */
 (function initPortfolioPreloader() {
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
 
-  const circleFill = document.getElementById('preloader-circle-fill');
-  const barFill = document.getElementById('preloader-bar-fill');
-  const percentText = document.getElementById('preloader-percent-text');
-  const statusText = document.getElementById('preloader-status-text');
-
-  // SVG circle radius is 52 -> 2 * PI * 52 ≈ 326.72
-  const circlePerimeter = 326.72;
+  const bar = document.getElementById('preloader-bar');
+  const count = document.getElementById('preloader-count');
+  const status = document.getElementById('preloader-status');
 
   let currentPercent = 0;
-  let targetPercent = 14;
+  let targetPercent = 12;
   let isFinished = false;
 
   const updateTarget = (val) => {
@@ -28,9 +24,9 @@
     }
   };
 
-  // Collect all critical image assets to preload
+  // Preload all critical project images and site media into memory cache
   const domImgSrcs = Array.from(document.querySelectorAll('img'))
-    .map(img => img.getAttribute('src'))
+    .map((img) => img.getAttribute('src'))
     .filter(Boolean);
 
   const keyAssets = [
@@ -39,7 +35,9 @@
     'assets/images/project-officeims.jpg',
     'assets/images/project-sirajiya.jpg',
     'assets/images/project-dragonweb.jpg',
-    'assets/images/project-flaris.jpg'
+    'assets/images/project-flaris.jpg',
+    'assets/images/zaid-avatar.jpg',
+    'assets/images/zaid-about.jpg'
   ];
 
   const uniqueAssets = Array.from(new Set([...domImgSrcs, ...keyAssets]));
@@ -49,7 +47,7 @@
   const onAssetComplete = () => {
     loadedAssets++;
     if (totalAssets > 0) {
-      // Images contribute up to 60% of total progress
+      // Media cache contributes up to 60% of total progress
       const imgFraction = (loadedAssets / totalAssets) * 60;
       updateTarget(15 + imgFraction);
     }
@@ -58,7 +56,7 @@
   if (totalAssets === 0) {
     updateTarget(65);
   } else {
-    uniqueAssets.forEach(src => {
+    uniqueAssets.forEach((src) => {
       const img = new Image();
       img.onload = onAssetComplete;
       img.onerror = onAssetComplete;
@@ -66,14 +64,14 @@
     });
   }
 
-  // Preload web fonts
+  // Preload web fonts (Outfit, Plus Jakarta Sans, Fira Code)
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready
       .then(() => updateTarget(Math.max(targetPercent, 85)))
       .catch(() => updateTarget(Math.max(targetPercent, 85)));
   }
 
-  // Window load event (stylesheets, scripts, external icons)
+  // Window load event (stylesheets, scripts, icons)
   const onWindowLoad = () => {
     updateTarget(100);
   };
@@ -84,42 +82,39 @@
     window.addEventListener('load', onWindowLoad, { once: true });
   }
 
-  // Safety fallback timeout: Never keep the user waiting more than 3.2s
+  // Safety fallback timeout: Never freeze for more than 3.2s
   const safetyTimeout = setTimeout(() => {
     targetPercent = 100;
   }, 3200);
 
   const getStatusMessage = (p) => {
-    if (p < 25) return 'Initializing workspace...';
-    if (p < 55) return 'Loading project showcases & media...';
-    if (p < 85) return 'Rendering typography & UI components...';
-    if (p < 100) return 'Optimizing performance...';
-    return 'Ready! Welcome to my portfolio';
+    if (p < 25) return 'Loading experience';
+    if (p < 60) return 'Caching visual assets';
+    if (p < 90) return 'Preparing workspace';
+    if (p < 100) return 'Finalizing';
+    return 'Welcome';
   };
 
   // Smooth frame-by-frame interpolation
   function stepProgress() {
     if (currentPercent < targetPercent) {
       const delta = targetPercent - currentPercent;
-      const step = Math.max(1, Math.ceil(delta * 0.14));
+      const step = Math.max(1, Math.ceil(delta * 0.12));
       currentPercent = Math.min(currentPercent + step, targetPercent);
 
-      if (percentText) percentText.textContent = `${currentPercent}%`;
-      if (barFill) barFill.style.width = `${currentPercent}%`;
-      if (circleFill) {
-        const offset = circlePerimeter - (circlePerimeter * currentPercent) / 100;
-        circleFill.style.strokeDashoffset = Math.max(0, offset);
-      }
-      if (statusText) {
-        statusText.textContent = getStatusMessage(currentPercent);
-      }
+      if (count) count.textContent = currentPercent;
+      if (bar) bar.style.width = `${currentPercent}%`;
+      if (status) status.textContent = getStatusMessage(currentPercent);
     }
 
     if (currentPercent >= 100 && !isFinished) {
       isFinished = true;
       clearTimeout(safetyTimeout);
-      if (statusText) statusText.textContent = 'Ready! Welcome';
+      if (count) count.textContent = '100';
+      if (bar) bar.style.width = '100%';
+      if (status) status.textContent = 'Welcome';
 
+      // Brief gentle hold at 100% so user sees completion, then silky fade
       setTimeout(() => {
         preloader.classList.add('loaded');
         document.body.classList.remove('loading');
@@ -127,7 +122,7 @@
         setTimeout(() => {
           preloader.setAttribute('aria-hidden', 'true');
           preloader.style.display = 'none';
-        }, 700);
+        }, 750);
       }, 300);
 
       return;

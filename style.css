@@ -206,7 +206,7 @@ button {
 }
 
 /* ==========================================================================
-   2.1 Professional Full-Screen Preloader
+   2.1 Minimalist Luxury Professional Preloader
    ========================================================================== */
 body.loading {
   overflow: hidden !important;
@@ -218,342 +218,203 @@ body.loading {
   inset: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--bg-primary);
+  background: var(--bg-primary);
   z-index: 999999;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, visibility;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
 }
 
 .preloader.loaded {
   opacity: 0;
   visibility: hidden;
+  transform: scale(1.025);
+  filter: blur(8px);
   pointer-events: none;
 }
 
-.preloader-backdrop {
+/* Ambient Radial Glow */
+.preloader-ambient-glow {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.preloader-glow-orb {
-  position: absolute;
+  width: 480px;
+  height: 480px;
   border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.35;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, rgba(6, 182, 212, 0.08) 45%, transparent 70%);
+  filter: blur(80px);
   pointer-events: none;
+  animation: preloaderPulseGlow 4s ease-in-out infinite alternate;
 }
 
-[data-theme="light"] .preloader-glow-orb {
-  opacity: 0.18;
+[data-theme="light"] .preloader-ambient-glow {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(6, 182, 212, 0.06) 45%, transparent 70%);
 }
 
-.preloader-glow-1 {
-  width: 380px;
-  height: 380px;
-  background: radial-gradient(circle, #6366f1 0%, rgba(99, 102, 241, 0) 70%);
-  top: 25%;
-  left: 25%;
-  transform: translate(-50%, -50%);
-  animation: preloaderPulseOrb 4s ease-in-out infinite alternate;
+@keyframes preloaderPulseGlow {
+  0% { transform: scale(0.92); opacity: 0.6; }
+  100% { transform: scale(1.12); opacity: 1; }
 }
 
-.preloader-glow-2 {
-  width: 340px;
-  height: 340px;
-  background: radial-gradient(circle, #06b6d4 0%, rgba(6, 182, 212, 0) 70%);
-  bottom: 25%;
-  right: 25%;
-  transform: translate(50%, 50%);
-  animation: preloaderPulseOrb 4s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes preloaderPulseOrb {
-  0% {
-    transform: scale(0.9) translate(-10px, -10px);
-    opacity: 0.25;
-  }
-  100% {
-    transform: scale(1.15) translate(10px, 10px);
-    opacity: 0.45;
-  }
-}
-
-.preloader-content {
+/* Center Container */
+.preloader-inner {
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: var(--space-xl);
-  max-width: 440px;
   width: 90%;
-  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 380px;
 }
 
-.preloader.loaded .preloader-content {
-  transform: scale(0.94) translateY(-14px);
-}
-
-/* Brand Ring & Monogram */
-.preloader-brand {
-  position: relative;
-  width: 124px;
-  height: 124px;
-  margin-bottom: var(--space-md);
+/* Logo Box Frame */
+.preloader-logo-frame {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 1.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  animation: preloaderLogoFloat 3s ease-in-out infinite alternate;
 }
 
-.preloader-ring {
+.preloader-logo-frame::after {
+  content: '';
   position: absolute;
-  inset: 0;
+  inset: -6px;
+  border-radius: 20px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, transparent 70%);
+  z-index: -1;
+  filter: blur(12px);
+}
+
+.preloader-logo-svg {
   width: 100%;
   height: 100%;
+  filter: drop-shadow(0 4px 18px rgba(99, 102, 241, 0.4));
 }
 
-.preloader-ring-svg {
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
+@keyframes preloaderLogoFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
 }
 
-.preloader-ring-track {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.08);
-  stroke-width: 3.5;
+/* Brand Text */
+.preloader-brand-text {
+  margin-bottom: 1.75rem;
 }
 
-[data-theme="light"] .preloader-ring-track {
-  stroke: rgba(0, 0, 0, 0.08);
-}
-
-.preloader-ring-fill {
-  fill: none;
-  stroke: url(#preloader-grad);
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-dasharray: 326.72;
-  stroke-dashoffset: 326.72;
-  filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.6));
-  transition: stroke-dashoffset 0.15s ease-out;
-}
-
-.preloader-logo-icon {
-  position: relative;
-  z-index: 1;
-  width: 62px;
-  height: 62px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: preloaderLogoBreathe 2.5s ease-in-out infinite;
-}
-
-.preloader-svg-logo {
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 0 14px rgba(99, 102, 241, 0.35));
-}
-
-@keyframes preloaderLogoBreathe {
-  0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.35));
-  }
-  50% {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 22px rgba(6, 182, 212, 0.6));
-  }
-}
-
-/* Preloader Name & Badge */
-.preloader-name {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  margin-bottom: var(--space-xs);
+.preloader-title {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.preloader-name-zaid {
+  letter-spacing: 0.28em;
   color: var(--text-primary);
+  margin-bottom: 0.35rem;
+  text-indent: 0.28em;
 }
 
-.preloader-name-ahmad {
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.preloader-badge {
-  font-size: 0.68rem;
+.preloader-subtitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
   font-weight: 600;
-  padding: 0.2rem 0.65rem;
-  border-radius: var(--radius-full);
-  background: rgba(99, 102, 241, 0.14);
-  color: #818cf8;
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
   text-transform: uppercase;
-  margin-left: 0.35rem;
+  text-indent: 0.2em;
 }
 
-[data-theme="light"] .preloader-badge {
-  background: rgba(99, 102, 241, 0.1);
-  color: #4f46e5;
-  border-color: rgba(99, 102, 241, 0.25);
-}
-
-/* Progress Container */
-.preloader-progress-container {
+/* Hairline Progress Track */
+.preloader-progress-track {
   width: 100%;
-  max-width: 320px;
-  margin-top: var(--space-sm);
-  margin-bottom: var(--space-md);
-}
-
-.preloader-progress-bar {
-  position: relative;
-  width: 100%;
-  height: 5px;
+  max-width: 260px;
+  height: 3px;
   background: rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-full);
+  border-radius: 999px;
   overflow: hidden;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 0.95rem;
+  position: relative;
 }
 
-[data-theme="light"] .preloader-progress-bar {
+[data-theme="light"] .preloader-progress-track {
   background: rgba(0, 0, 0, 0.08);
 }
 
-.preloader-progress-fill {
+.preloader-progress-bar {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
-  border-radius: var(--radius-full);
-  box-shadow: 0 0 14px rgba(99, 102, 241, 0.7);
-  transition: width 0.12s ease-out;
-  position: relative;
+  border-radius: 999px;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.7);
+  transition: width 0.15s ease-out;
 }
 
-.preloader-progress-fill::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-  animation: preloaderShimmer 1.8s infinite;
-}
-
-@keyframes preloaderShimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-.preloader-meta {
+/* Info Row: Status & Percentage */
+.preloader-info-row {
+  width: 100%;
+  max-width: 260px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 0.6rem;
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
-.preloader-status {
+.preloader-status-text {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.01em;
-  color: var(--text-secondary);
-  transition: color var(--transition-fast);
-}
-
-.preloader-percent {
-  font-family: 'Fira Code', monospace;
-  font-weight: 600;
-  color: #38bdf8;
-  font-size: 0.82rem;
-}
-
-/* Preloader Stack Tags */
-.preloader-tags {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-top: var(--space-xs);
-}
-
-.preloader-tags span {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.28rem 0.68rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: var(--radius-full);
-  font-size: 0.72rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-  transition: all var(--transition-fast);
-}
-
-[data-theme="light"] .preloader-tags span {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.08);
-}
-
-.preloader-tags span i {
-  color: var(--primary);
   font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  transition: color 0.3s ease;
+}
+
+.preloader-counter {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 @media (max-width: 480px) {
-  .preloader-brand {
-    width: 104px;
-    height: 104px;
+  .preloader-logo-frame {
+    width: 62px;
+    height: 62px;
+    margin-bottom: 1.3rem;
   }
 
-  .preloader-logo-icon {
-    width: 52px;
-    height: 52px;
+  .preloader-title {
+    font-size: 1.15rem;
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
   }
 
-  .preloader-name {
-    font-size: 1.4rem;
+  .preloader-subtitle {
+    font-size: 0.68rem;
   }
 
-  .preloader-progress-container {
-    max-width: 270px;
+  .preloader-progress-track,
+  .preloader-info-row {
+    max-width: 220px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .preloader,
-  .preloader-content,
-  .preloader-progress-fill,
-  .preloader-ring-fill {
+  .preloader-progress-bar {
     transition-duration: 0.05s !important;
   }
-  .preloader-glow-1,
-  .preloader-glow-2,
-  .preloader-logo-icon,
-  .preloader-progress-fill::after {
+
+  .preloader-ambient-glow,
+  .preloader-logo-frame {
     animation: none !important;
   }
 }
